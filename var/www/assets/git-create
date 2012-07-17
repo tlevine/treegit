@@ -19,11 +19,18 @@ ssh git.thomaslevine.com "git init --bare $name.git"
 
 # Register with cgit
 ssh git.thomaslevine.com "
-echo repo.path=/home/tlevine/$name.git >> ~/cgitrepos &&
+grep \"$name\".git ~/cgitrepos && exit 1
+echo >> ~/cgitrepos &&
+echo repo.url=\"$name\" >> ~/cgitrepos &&
+echo repo.path=/home/tlevine/\"$name\".git >> ~/cgitrepos &&
 echo repo.owner=occurrence@thomaslevine.com >> ~/cgitrepos &&
-echo repo.readme=readme.md >> ~/cgitrepos"
+echo repo.readme=readme.md >> ~/cgitrepos
+"
+#ssh git.thomaslevine.com "cd git.thomaslevine.com && git commit . -m 'Add $name.git repository'"
 
 # Add locally
 git remote add "$remote_name" git.thomaslevine.com:"$name".git
 git checkout master
-git push -u "$remote_name" master
+u=''
+[ "$remote_name" = origin ] && u='-u'
+git push $u "$remote_name" master
