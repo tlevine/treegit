@@ -26,7 +26,10 @@ echo repo.path=/home/tlevine/\"$name\".git >> ~/cgitrepos &&
 echo repo.owner=occurrence@thomaslevine.com >> ~/cgitrepos &&
 echo repo.readme=readme.md >> ~/cgitrepos
 "
-#ssh git.thomaslevine.com "cd git.thomaslevine.com && git commit . -m 'Add $name.git repository'"
+ssh git.thomaslevine.com "
+cp ~/cgitrepos ~/git.thomaslevine.com/etc &&
+cd git.thomaslevine.com &&
+git commit . -m 'Add $name.git repository'"
 
 # Add locally
 git remote add "$remote_name" git.thomaslevine.com:"$name".git
