@@ -1,0 +1,11 @@
+# The next repositories will be displayed under the 'extras' heading
+# section=extras
+
+# Add some mirrored repositories
+# section=mirrors
+
+repo.url=thomaslevine.com
+repo.path=/home/tlevine/thomaslevine.com.git
+repo.desc=thomaslevine.com in nanoc
+repo.owner=occurrence@thomaslevine.com
+repo.readme=readme.md

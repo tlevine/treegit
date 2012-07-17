@@ -60,45 +60,7 @@ mimetype.svg=image/svg+xml
 ##      and included like this:
 ##        include=/etc/cgitrepos
 ##
-
-repo.url=thomaslevine.com
-repo.path=/home/tlevine/thomaslevine.com.git
-repo.desc=thomaslevine.com in nanoc
-repo.owner=occurrence@thomaslevine.com
-repo.readme=readme.md
-
-repo.url=bar
-repo.path=/pub/git/bar.git
-repo.desc=the bars for your foo
-repo.owner=barman@example.com
-repo.readme=info/web/about.html
-
-
-# The next repositories will be displayed under the 'extras' heading
-section=extras
-
-
-repo.url=baz
-repo.path=/pub/git/baz.git
-repo.desc=a set of extensions for bar users
-
-repo.url=wiz
-repo.path=/pub/git/wiz.git
-repo.desc=the wizard of foo
-
-
-# Add some mirrored repositories
-section=mirrors
-
-
-repo.url=git
-repo.path=/pub/git/git.git
-repo.desc=the dscm
-
-
-repo.url=linux
-repo.path=/pub/git/linux.git
-repo.desc=the kernel
+include=/etc/cgitrepos
 
 # Disable adhoc downloads of this repo
 repo.snapshots=0
