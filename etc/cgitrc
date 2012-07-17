@@ -60,7 +60,7 @@ mimetype.svg=image/svg+xml
 ##      and included like this:
 ##        include=/etc/cgitrepos
 ##
-include=/etc/cgitrepos
+include=/home/tlevine/cgitrepos
 
 # Disable adhoc downloads of this repo
 repo.snapshots=0
