@@ -14,3 +14,8 @@ repo.url=dumptruck
 repo.path=/home/tlevine/dumptruck.git
 repo.owner=occurrence@thomaslevine.com
 repo.readme=readme.md
+
+repo.url=git.thomaslevine.com
+repo.path=/home/tlevine/git.thomaslevine.com.git
+repo.owner=occurrence@thomaslevine.com
+repo.readme=readme.md
