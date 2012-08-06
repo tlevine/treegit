@@ -3,11 +3,13 @@ VPS from Prometeus.
 
 Install dependencies
 
-    apt-get install apache2
+    apt-get install apache2 \
+    libapache2-mod-gnutls ssl-cert
 
 Then unpack the current directory into `/`.
 This creates an apache site that you can enable.
 
+    a2enmod ssl
     a2ensite cgit
 
 You should also disable other things that would interfere.
