@@ -1,10 +1,19 @@
-<div class='content'><div id='summary'><h2>Using Tom's git hosting</h2>
+<div class='content'><div id='summary'>
 
-<h2>Pulling</h2>
+<h2>About Tom's git hosting</h2>
+<p>Tom hosts his git repositories here. He also hosts them on some other places</p>
+<ul>
+  <li><a href="https://github.com/tlevine">GitHub</a></li>
+  <li><a href="https://gitorious.org/tlevine">Gitorious</a></li>
+</ul>
+<p>This page explains how to 
 
-<h2>Pushing</h2>
-<p>Set up SSH keys if you want.</p>
-<pre>scp-copy-id tlevine@git.thomaslevine.com</pre>
+<h2>Usage</h2>
+
+<h3>Pulling</h3>
+<p>If you are not Tom, this is probably all you'll be doing.</p>
+
+<h3>Creating</h3>
 <p>cgit searches for repositories in /home/tlevine. Here's a little helper to create repositories.</p>
 <pre>git-create() {
   repo=$(basename "$1" .git)
@@ -15,5 +24,11 @@
 <p>Run it like this</p>
 <pre>git-create foo</pre>
 <p>You may also edit the cgitrc file inside of your repository if you want things to look nice.</p>
+
+<h3>Pushing</h3>
+<p>Set up SSH keys if you want.</p>
+<pre>scp-copy-id tlevine@git.thomaslevine.com</pre>
+<p>Then set the remote.</p>
+<pre>git remote add cgit tlevine@git.thomaslevine.com:$(basename "$PWD") master</pre>
 
 </div></div> <!-- class=content -->
