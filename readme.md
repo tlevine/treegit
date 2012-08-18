@@ -22,7 +22,7 @@ Install dependencies
 
 Unpack the current directory into `/`.
 
-    scp -r etc usr var root@$TREEGIT_DOMAIN_NAME
+    scp -r etc usr var root@$TREEGIT_DOMAIN_NAME:/
 
 ### Building from source
 If you want to build from source, follow the directions
