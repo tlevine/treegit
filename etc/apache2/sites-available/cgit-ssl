@@ -24,10 +24,14 @@
         LogLevel warn
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        # SSL access control
+        # SSL with a client certificate
         SSLEngine on
-        SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
-        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	SSLCertificateFile    /etc/ssl/certs/ssl-cert-treegit.cert
+	#SSLCertificateFile    /etc/ssl/certs/ssl-cert-treegit.pem
+	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-treegit.key
+	SSLCACertificateFile /etc/ssl/certs/ssl-cert-treegit.cert
+	SSLVerifyClient require
+
 </VirtualHost>
 <VirtualHost *:80>
         Redirect 301 / https://TREEGIT_DOMAIN_NAME/
