@@ -1,6 +1,6 @@
-<VirtualHost *:80>
+<VirtualHost *:443>
         ServerAdmin occurrence@thomaslevine.com
- 
+
         Alias /assets/ "/var/www/assets/"
         <Directory "/var/www/assets/">
                 AllowOverride None
@@ -17,4 +17,12 @@
         LogLevel warn
 
         CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # SSL access control
+        SSLEngine on
+        SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+</VirtualHost>
+<VirtualHost *:80>
+        Redirect 301 / https://git.thomaslevine.com/
 </VirtualHost>
