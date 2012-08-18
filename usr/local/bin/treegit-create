@@ -3,7 +3,16 @@
 
 repo=$(basename "$1" .git)
 
-if [ -e "$HOME/$repo.git" ]
+if [ "$repo" = '' ]
+  then
+  echo 'Repository name may not be "" or ".git".'
+  echo "usage: $0 <repository name>"
+  exit 1
+elif [ $(echo "$repo"|cut -c1) = '.' ]
+  then
+  echo 'Repository name may not begin with ".".'
+  exit 1
+elif [ -e "$HOME/$repo.git" ]
   then
   echo 'This repository is already on the server.'
   exit 1
