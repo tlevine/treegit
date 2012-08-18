@@ -1,0 +1,3 @@
+#!/bin/sh
+[ -e \"~/$repo.git\" ] || git init --bare \"~/$repo.git\"
+exec git update-server-info
