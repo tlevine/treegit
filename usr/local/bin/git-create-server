@@ -7,14 +7,6 @@ if [ -e "$HOME/$repo.git" ]
   then
   echo 'This repository is already on the server.'
   exit 1
-elif [ "$repo" = 'clone' ]
-  then
-  echo "You're not allowed to name a repository \"clone\" on this server."
-  exit 1
-elif [ "$repo" = 'assets' ]
-  echo "You're not allowed to name a repository \"assets\" on this server."
-  exit 1
-  then
 else
   git init --bare "$HOME/$repo.git" > /dev/null &&
 
