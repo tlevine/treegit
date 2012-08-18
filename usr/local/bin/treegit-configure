@@ -1,0 +1,19 @@
+#!/bin/sh
+
+[ $TREEGIT_USERNAME='' ] && echo 'Please specify a TREEGIT_USERNAME' && exit 1
+[ $TREEGIT_DOMAIN_NAME='' ] && echo 'Please specify a TREEGIT_DOMAIN_NAME' && exit 1
+[ $TREEGIT_EMAIL_ADDRESS='' ] &&
+  echo 'No email address was specified, so server admin email address will not be configured' &&
+  TREEGIT_EMAIL_ADDRESS=TREEGIT_EMAIL_ADDRESS
+
+# Figure out the file names inside the repository by running
+# grep -m1 -r TREE etc var usr tests|cut -d: -f1|grep -v cgit.cgi
+files='etc/cgitrc var/www/readme.html usr/local/bin/treegit-create usr/local/bin/treegit-configure'
+for file in $files
+  do
+  sed -i \
+    -e "s/TREEGIT_USERNAME/$TREEGIT_USERNAME/g" \
+    -e "s/TREEGIT_DOMAIN_NAME/$TREEGIT_USERNAME/g" \
+    -e "s/TREEGIT_EMAIL_ADDRESS/$TREEGIT_USERNAME/g" \
+    $file
+done

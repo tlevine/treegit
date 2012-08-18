@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-        ServerAdmin TREEGIT_EMAIL
+        ServerAdmin TREEGIT_EMAIL_ADDRESS
  
         Alias /assets/ "/var/www/assets/"
         <Directory "/var/www/assets/">
