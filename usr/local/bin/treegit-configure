@@ -8,7 +8,7 @@
 
 # Figure out the file names inside the repository by running
 # grep -m1 -r TREE etc var usr tests|cut -d: -f1|grep -v cgit.cgi
-files='etc/cgitrc var/www/readme.html usr/local/bin/treegit-create usr/local/bin/treegit-configure'
+files='etc/cgitrc var/www/readme.html usr/local/bin/treegit-create'
 for file in $files
   do
   sed -i \
