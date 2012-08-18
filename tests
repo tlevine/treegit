@@ -7,7 +7,7 @@
 # Temporary stuff
 repo=$(uuidgen)
 tmp=$(mktemp -d)
-cloneurl="http://$TREEGIT_DOMAIN_NAME/clone/$repo.git"
+cloneurl="$TREEGIT_DOMAIN_NAME/clone/$repo.git"
 
 catch() {
   [ "$?" = '0' ] && passed=true
@@ -26,7 +26,9 @@ catch() {
 
 clear
 
-wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/?p=about|grep 'treegit-create' > /dev/null
+alias get="wget --quiet -O - --no-check-certificate "
+
+get http://$TREEGIT_DOMAIN_NAME/?p=about|grep 'treegit-create' > /dev/null
 catch 'I should see a treegit-create function at http://$TREEGIT_DOMAIN_NAME/?p=about.'
 
 ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME 'echo hi' > /dev/null
@@ -35,7 +37,7 @@ catch 'I should be able to ssh to $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME'
 ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "treegit-create $repo" > /dev/null
 catch 'I should be able to create a repository on the server.'
 
-wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/|grep $repo > /dev/null
+get http://$TREEGIT_DOMAIN_NAME/|grep $repo > /dev/null
 catch "I should see the repository on http://$TREEGIT_DOMAIN_NAME."
 
 (
@@ -50,12 +52,12 @@ catch "I should see the repository on http://$TREEGIT_DOMAIN_NAME."
   catch 'I should be able to push to the newly-created repository.'
 )
 
-wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/$repo/|grep $cloneurl > /dev/null
+get http://$TREEGIT_DOMAIN_NAME/$repo/|grep $cloneurl > /dev/null
 catch 'Once I push the repository, I should see the clone url.'
 
 (
   cd $tmp
-  git clone $cloneurl > /dev/null
+  git clone http://$cloneurl > /dev/null
   catch 'I should be able to clone the repository over http.'
 )
 
