@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-        ServerAdmin occurrence@thomaslevine.com
+        ServerAdmin TREEGIT_EMAIL
  
         Alias /assets/ "/var/www/assets/"
         <Directory "/var/www/assets/">
@@ -9,8 +9,8 @@
                 Allow from all
         </Directory>
 
-	AliasMatch ^/clone/([^.].*)?$ "/home/tlevine/$1"
-	<Directory "/home/tlevine/">
+	AliasMatch ^/clone/([^.].*)?$ "/home/TREEGIT_USERNAME/$1"
+	<Directory "/home/TREEGIT_USERNAME/">
 		Options -Indexes
                 Order allow,deny
                 Allow from all

@@ -24,5 +24,5 @@ else
   echo 'exec git update-server-info' >> "$HOME/$repo.git/hooks/post-update" &&
   chmod +x "$HOME/$repo.git/hooks/post-update" &&
   echo "The remote has been created. Run this to add it:" &&
-  echo "  git remote add origin 'tlevine@git.thomaslevine.com:$repo.git'"
+  echo "  git remote add origin 'TREEGIT_USERNAME@TREEGIT_DOMAIN_NAME:$repo.git'"
 fi

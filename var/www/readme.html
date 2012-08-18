@@ -14,9 +14,9 @@
 <p>If you are not Tom, this is probably all you'll be doing.</p>
 
 <h3>Creating</h3>
-<p>cgit searches for repositories in /home/tlevine. Here's a little helper to create repositories.</p>
+<p>cgit searches for repositories in /home/TREEGIT_USERNAME. Here's a little helper to create repositories.</p>
 <pre>git-create() {
-  ssh tlevine@git.thomaslevine.com "git-create-server '$1'"
+  ssh TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "git-create-server '$1'"
 }</pre>
 <p>Run it like this</p>
 <pre>git-create $(basename "$PWD")</pre>
@@ -24,8 +24,8 @@
 
 <h3>Pushing</h3>
 <p>Set up SSH keys if you want.</p>
-<pre>scp-copy-id tlevine@git.thomaslevine.com</pre>
+<pre>scp-copy-id TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME</pre>
 <p>Then set the remote.</p>
-<pre>git remote add cgit tlevine@git.thomaslevine.com:$(basename "$PWD").git master</pre>
+<pre>git remote add cgit TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME:$(basename "$PWD").git master</pre>
 
 </div></div> <!-- class=content -->
