@@ -29,7 +29,7 @@ logo=/assets/cgit.png
 max-stats=quarter
 
 # Set the title and heading of the repository index page
-root-title=Secrets
+root-title=Things
 
 # Set a subheading for the repository index page
 # root-desc=
@@ -52,15 +52,8 @@ mimetype.pdf=application/pdf
 mimetype.png=image/png
 mimetype.svg=image/svg+xml
 
-##
-## List of repositories.
-## PS: Any repositories listed when section is unset will not be
-##     displayed under a section heading
-## PPS: This list could be kept in a different file (e.g. '/etc/cgitrepos')
-##      and included like this:
-##        include=/etc/cgitrepos
-##
-include=/home/tlevine/cgitrepos
+# List of repositories.
+scan-path=/home/tlevine
 
 # Disable adhoc downloads of this repo
 repo.snapshots=0
