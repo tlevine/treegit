@@ -12,7 +12,7 @@ Install dependencies
 
 Then unpack the current directory into `/`.
 
-    scp -r etc var home root@git.thomaslevine.com
+    scp -r etc home usr var root@git.thomaslevine.com
 
 ### Building from source
 If you want to build from source, follow the directions

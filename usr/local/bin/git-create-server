@@ -3,12 +3,15 @@
 
 repo=$(basename "$1" .git)
 
-if [ ! -e "~/$repo.git" ]
+if [ -e "$HOME/$repo.git" ]
   then
   echo 'This repository is already on the server.'
   exit 1
 else
-  git init --bare "~/$repo.git" &&
-  echo '#!/bin/sh' > "~/$repo.git" &&
-  echo 'exec git update-server-info' >> "~/$repo.git"
+  git init --bare "$HOME/$repo.git" &&
+
+  # So that cloning over HTTP works
+  # http://blog.publicfields.net/2011/03/how-to-setup-your-very-own-git-server.html
+  echo '#!/bin/sh' > "$HOME/$repo.git/hooks/post-update" &&
+  echo 'exec git update-server-info' >> "$HOME/$repo.git/hooks/post-update"
 fi
