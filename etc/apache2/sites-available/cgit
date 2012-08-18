@@ -8,13 +8,16 @@
                 Order allow,deny
                 Allow from all
         </Directory>
-        ScriptAlias / "/var/www/cgit.cgi/"
 
-	AliasMatch ^/clone/([^.].*)$ "/home/tlevine/$1"
+	AliasMatch ^/clone/([^.].*)?$ "/home/tlevine/$1"
 	<Directory "/home/tlevine/">
+		Options -Indexes
                 Order allow,deny
                 Allow from all
         </Directory>
+
+	# Must be last
+        ScriptAlias / "/var/www/cgit.cgi/"
 
         ErrorLog ${APACHE_LOG_DIR}/error.log
         LogLevel warn
