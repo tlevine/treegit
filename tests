@@ -1,10 +1,13 @@
 #!/bin/sh
 # Run this to test a deployment
 
+[ $TREEGIT_USERNAME='' ] || (echo 'Please specify a TREEGIT_USERNAME' && exit 1)
+[ $TREEGIT_DOMAIN_NAME='' ] || (echo 'Please specify a TREEGIT_DOMAIN_NAME' && exit 1)
+
 # Temporary stuff
 repo=$(uuidgen)
 tmp=$(mktemp -d)
-cloneurl="http://git.thomaslevine.com/clone/$repo.git"
+cloneurl="http://$TREEGIT_DOMAIN_NAME/clone/$repo.git"
 
 catch() {
   [ "$?" = '0' ] && passed=true
@@ -23,20 +26,17 @@ catch() {
 
 clear
 
-wget --quiet -O - http://git.thomaslevine.com/?p=about|grep 'git-create' > /dev/null
-catch 'I should see a git-create function at http://git.thomaslevine.com/?p=about.'
+wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/?p=about|grep 'git-create' > /dev/null
+catch 'I should see a git-create function at http://$TREEGIT_DOMAIN_NAME/?p=about.'
 
-ssh tlevine@git.thomaslevine.com 'echo hi' > /dev/null
-catch 'I should be able to ssh to tlevine@git.thomaslevine.com'
+ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME 'echo hi' > /dev/null
+catch 'I should be able to ssh to $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME'
 
-wget --quiet -O - http://git.thomaslevine.com/|grep 'piwik.thomaslevine.com' > /dev/null
-catch 'Piwik should be called on http://git.thomaslevine.com.'
-
-ssh tlevine@git.thomaslevine.com "git-create-server $repo" > /dev/null
+ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "git-create-server $repo" > /dev/null
 catch 'I should be able to create a repository on the server.'
 
-wget --quiet -O - http://git.thomaslevine.com/|grep $repo > /dev/null
-catch 'I should see the repository on http://git.thomaslevine.com.'
+wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/|grep $repo > /dev/null
+catch "I should see the repository on http://$TREEGIT_DOMAIN_NAME."
 
 (
   cd $tmp > /dev/null
@@ -46,11 +46,11 @@ catch 'I should see the repository on http://git.thomaslevine.com.'
   echo bar > baz > /dev/null
   git add baz > /dev/null
   git commit . -m foobar > /dev/null
-  git push tlevine@git.thomaslevine.com:$repo.git master &> /dev/null
+  git push $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME:$repo.git master &> /dev/null
   catch 'I should be able to push to the newly-created repository.'
 )
 
-wget --quiet -O - http://git.thomaslevine.com/$repo/|grep $cloneurl > /dev/null
+wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/$repo/|grep $cloneurl > /dev/null
 catch 'Once I push the repository, I should see the clone url.'
 
 (
@@ -62,5 +62,5 @@ catch 'Once I push the repository, I should see the clone url.'
 echo \  
 echo 'Clean up:'
 echo "  rm -Rf $tmp"
-echo "  ssh tlevine@git.thomaslevine.com 'rm -Rf $repo.git'"
+echo "  ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME 'rm -Rf $repo.git'"
 echo "I don't run these manually because bugs could be bad."
