@@ -1,3 +1,14 @@
 #!/bin/sh
-[ -e \"~/$repo.git\" ] || git init --bare \"~/$repo.git\"
-exec git update-server-info
+# Initialize a bare repository.
+
+repo=$(basename "$1" .git)
+
+if [ ! -e "~/$repo.git" ]
+  then
+  echo 'This repository is already on the server.'
+  exit 1
+else
+  git init --bare "~/$repo.git" &&
+  echo '#!/bin/sh' > "~/$repo.git" &&
+  echo 'exec git update-server-info' >> "~/$repo.git"
+fi
