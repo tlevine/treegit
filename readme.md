@@ -4,9 +4,13 @@ treegit
 be run on Debian 5.0 on a cheap VPS dedicated to treegit, but it could work in
 other ways with some adjustment.
 
-## Install
+## Install/Update
 Commands in this "Install" section get run on a computer other than the server
-we're configuring. First, choose your domain name.
+we're configuring. It's fine to run these commands on an existing installation,
+(Configuration files will simply be replaced.) so that's a reasonable way to
+update treegit.
+
+First, choose your domain name.
 
     export TREEGIT_DOMAIN_NAME=git.thomaslevine.com
 
