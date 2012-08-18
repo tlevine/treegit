@@ -55,6 +55,7 @@ non-SSL version.
 This is all you need to run.
 
     a2ensite cgit
+    service apache2 reload
 
 ### With SSL
 Enable SSL.
@@ -65,6 +66,10 @@ Enable SSL.
 Then enable cgit.
 
     a2ensite cgit-ssl
+
+And reload.
+
+    service apache2 reload
 
 ### Test
 Now log out of the SSH session and test that it's working by running the tests.

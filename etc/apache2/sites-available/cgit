@@ -1,6 +1,6 @@
 <VirtualHost *:80>
-        ServerAdmin TREEGIT_EMAIL_ADDRESS
- 
+        ServerAdmin TREEGIT_EMAIL_ADDRESS 
+
         Alias /assets/ "/var/www/assets/"
         <Directory "/var/www/assets/">
                 AllowOverride None
@@ -19,6 +19,7 @@
 	# Must be last
         ScriptAlias / "/var/www/cgit.cgi/"
 
+        # Logs
         ErrorLog ${APACHE_LOG_DIR}/error.log
         LogLevel warn
         CustomLog ${APACHE_LOG_DIR}/access.log combined

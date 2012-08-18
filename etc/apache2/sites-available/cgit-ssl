@@ -1,6 +1,6 @@
 <VirtualHost *:443>
-        ServerAdmin occurrence@thomaslevine.com
-
+        ServerAdmin TREEGIT_EMAIL_ADDRESS
+ 
         Alias /assets/ "/var/www/assets/"
         <Directory "/var/www/assets/">
                 AllowOverride None
@@ -8,14 +8,20 @@
                 Order allow,deny
                 Allow from all
         </Directory>
+
+	AliasMatch ^/clone/([^.].*)?$ "/home/TREEGIT_USERNAME/$1"
+	<Directory "/home/TREEGIT_USERNAME/">
+		Options -Indexes
+                Order allow,deny
+                Allow from all
+        </Directory>
+
+	# Must be last
         ScriptAlias / "/var/www/cgit.cgi/"
 
+        # Logs
         ErrorLog ${APACHE_LOG_DIR}/error.log
-
-        # Possible values include: debug, info, notice, warn, error, crit,
-        # alert, emerg.
         LogLevel warn
-
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
         # SSL access control
@@ -24,5 +30,5 @@
         SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 </VirtualHost>
 <VirtualHost *:80>
-        Redirect 301 / https://git.thomaslevine.com/
+        Redirect 301 / https://TREEGIT_DOMAIN_NAME/
 </VirtualHost>
