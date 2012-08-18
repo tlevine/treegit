@@ -1,4 +1,4 @@
-<VirtualHost git.thomaslevine.com:80>
+<VirtualHost *:80>
         ServerAdmin occurrence@thomaslevine.com
  
         Alias /assets/ "/var/www/assets/"
@@ -10,14 +10,7 @@
         </Directory>
         ScriptAlias / "/var/www/cgit.cgi/"
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        LogLevel warn
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-<VirtualHost *:80>
-        ServerAdmin occurrence@thomaslevine.com
-
-	AliasMatch ^/([^.].*)$ "/home/tlevine/$1"
+	AliasMatch ^/clone/([^.].*)$ "/home/tlevine/$1"
 	<Directory "/home/tlevine/">
                 Order allow,deny
                 Allow from all
