@@ -1,18 +1,30 @@
-This is intended to be run on businesscard Debian on a cheap
-VPS from Prometeus.
+treegit
+==================
+**treegit** is an off-the-self cgit server with some helpers. It is intended to
+be run on Debian 5.0 on a cheap VPS dedicated to treegit, but it could work in
+other ways with some adjustment.
 
 ## Install
+Unless I say otherwise, run all this stuff on a computer other than the server
+we're configuring. First, choose your username and domain name. (We only need
+these for the installation, not for use afterwards.)
+
+    export TREEGIT_USERNAME=tlevine
+    export TREEGIT_DOMAIN_NAME=git.thomaslevine.com
+
+You'll have to run those lines again if you open a new shell.
+
 Set up SSH keys if you want.
 
-    scp-copy-id root@git.thomaslevine.com
+    scp-copy-id root@$TREEGIT_DOMAIN_NAME
 
 Install dependencies
 
-    apt-get install apache2
+    ssh root@$TREEGIT_DOMAIN_NAME 'apt-get install apache2'
 
-Then unpack the current directory into `/`.
+Unpack the current directory into `/`.
 
-    scp -r etc home usr var root@git.thomaslevine.com
+    scp -r etc home usr var root@$TREEGIT_DOMAIN_NAME
 
 ### Building from source
 If you want to build from source, follow the directions
@@ -23,7 +35,7 @@ in the current repository, then unpack the repository to `/`.
 ## Configure
 Disable any Apache sites that are enabled.
 
-     /etc/apache2/sites-enabled/*
+    ssh root@$TREEGIT_DOMAIN_NAME 'rm /etc/apache2/sites-enabled/*'
 
 Then enable the cgit site. You get to choose between an SSL version and a
 non-SSL version.
@@ -31,17 +43,17 @@ non-SSL version.
 ### Without SSL
 This is all you need to run.
 
-    a2ensite cgit
+    ssh root@$TREEGIT_DOMAIN_NAME 'a2ensite cgit'
 
 ### With SSL
 Enable SSL.
 
-    apt-get install libapache2-mod-gnutls ssl-cert
-    a2enmod ssl
+    ssh root@$TREEGIT_DOMAIN_NAME 'apt-get install libapache2-mod-gnutls ssl-cert'
+    ssh root@$TREEGIT_DOMAIN_NAME 'a2enmod ssl'
 
 Then enable cgit.
 
-    a2ensite cgit-ssl
+    ssh root@$TREEGIT_DOMAIN_NAME 'a2ensite cgit-ssl'
 
 ### Test
 Test that it's working by running the tests.
@@ -49,7 +61,9 @@ Test that it's working by running the tests.
     ./tests
 
 ## Use
-Follow the directions that appear in http://git.thomaslevine.com/?p=about
+Once you've installed it, follow the directions that appear here.
+
+    echo http://$TREEGIGT_DOMAIN_NAME/?p=about
 
 ## To do
 
