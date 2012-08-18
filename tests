@@ -26,13 +26,13 @@ catch() {
 
 clear
 
-wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/?p=about|grep 'git-create' > /dev/null
-catch 'I should see a git-create function at http://$TREEGIT_DOMAIN_NAME/?p=about.'
+wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/?p=about|grep 'treegit-create' > /dev/null
+catch 'I should see a treegit-create function at http://$TREEGIT_DOMAIN_NAME/?p=about.'
 
 ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME 'echo hi' > /dev/null
 catch 'I should be able to ssh to $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME'
 
-ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "git-create-server $repo" > /dev/null
+ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "treegit-create $repo" > /dev/null
 catch 'I should be able to create a repository on the server.'
 
 wget --quiet -O - http://$TREEGIT_DOMAIN_NAME/|grep $repo > /dev/null

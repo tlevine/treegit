@@ -15,11 +15,11 @@
 
 <h3>Creating</h3>
 <p>cgit searches for repositories in /home/TREEGIT_USERNAME. Here's a little helper to create repositories.</p>
-<pre>git-create() {
-  ssh TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "git-create-server '$1'"
+<pre>treegit-create() {
+  ssh TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "treegit-create '$1'"
 }</pre>
 <p>Run it like this</p>
-<pre>git-create $(basename "$PWD")</pre>
+<pre>treegit-create $(basename "$PWD")</pre>
 <p>You may also edit the cgitrc file inside of your repository if you want things to look nice.</p>
 
 <h3>Pushing</h3>
