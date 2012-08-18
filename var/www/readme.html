@@ -19,13 +19,13 @@
   ssh tlevine@git.thomaslevine.com "git-create-server '$1'"
 }</pre>
 <p>Run it like this</p>
-<pre>git-create foo</pre>
+<pre>git-create $(basename "$PWD")</pre>
 <p>You may also edit the cgitrc file inside of your repository if you want things to look nice.</p>
 
 <h3>Pushing</h3>
 <p>Set up SSH keys if you want.</p>
 <pre>scp-copy-id tlevine@git.thomaslevine.com</pre>
 <p>Then set the remote.</p>
-<pre>git remote add cgit tlevine@git.thomaslevine.com:$(basename "$PWD") master</pre>
+<pre>git remote add cgit tlevine@git.thomaslevine.com:$(basename "$PWD").git master</pre>
 
 </div></div> <!-- class=content -->

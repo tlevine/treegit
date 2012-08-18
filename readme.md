@@ -43,6 +43,16 @@ Then enable cgit.
 
     a2ensite cgit-ssl
 
+### Test
+Test that it's working by running the tests.
+
+    ./tests
+
 ## Use
-Add a cgitrc inside each of your repositories, and push them
-to /home/tlevine
+Follow the directions that appear in http://git.thomaslevine.com/?p=about
+
+## To do
+
+* Switch Apache for Nginx
+* Parametrize the user (not just tlevine) and domain (not just git.thomaslevine.com)
+* Set up basic http authentication for the SSL site.
