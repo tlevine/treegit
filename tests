@@ -1,5 +1,6 @@
 #!/bin/sh
-# Run this to test a deployment
+# Run this to test a deployment. It ignores SSL, so you can use it regardless
+# of whether you're using SSL.
 
 [ "$TREEGIT_USERNAME" = '' ] && echo 'Please specify a TREEGIT_USERNAME' && exit 1
 [ "$TREEGIT_DOMAIN_NAME" = '' ] && echo 'Please specify a TREEGIT_DOMAIN_NAME' && exit 1
@@ -26,7 +27,8 @@ catch() {
 
 clear
 
-alias get="wget --quiet -O - --no-check-certificate "
+# Quiet, follow redirects, don't check SSL certificates.
+alias get="curl -sLk secrets.thomaslevine.com"
 
 get http://$TREEGIT_DOMAIN_NAME/?p=about|grep 'treegit-create' > /dev/null
 catch 'I should see a treegit-create function at http://$TREEGIT_DOMAIN_NAME/?p=about.'
@@ -36,6 +38,10 @@ catch 'I should be able to ssh to $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME'
 
 ssh $TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "treegit-create $repo" > /dev/null
 catch 'I should be able to create a repository on the server.'
+
+sleep 2s
+get http://$TREEGIT_DOMAIN_NAME/|grep $repo > /dev/null
+catch "I should see the repository on http://$TREEGIT_DOMAIN_NAME."
 
 (
   cd $tmp > /dev/null
@@ -49,15 +55,12 @@ catch 'I should be able to create a repository on the server.'
   catch 'I should be able to push to the newly-created repository.'
 )
 
-get http://$TREEGIT_DOMAIN_NAME/|grep $repo > /dev/null
-catch "Once I push the repository, I should see the repository on http://$TREEGIT_DOMAIN_NAME."
-
 get http://$TREEGIT_DOMAIN_NAME/$repo/|grep $cloneurl > /dev/null
 catch 'Once I push the repository, I should see the clone url.'
 
 (
   cd $tmp
-  git clone http://$cloneurl > /dev/null
+  git clone --config http.sslVerify=false http://$cloneurl > /dev/null
   catch 'I should be able to clone the repository over http.'
 )
 
