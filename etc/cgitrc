@@ -13,8 +13,22 @@ enable-subject-links=1
 favicon=/assets/favicon.ico
 logo=/assets/cgit.png
 max-stats=quarter
+noplainemail=1
+remove-suffix=1
+robots="index, follow"
+root-title=Things
+scan-hidden-path=0
+scan-path=/home/tlevine
+root-desc="All your base are belong to us."
+root-readme=/var/www/readme.html
+side-by-side-diffs=1
+snapshots=tar.gz
 
-
+# Text which will be used as the formatstring for a hyperlink when a
+# submodule is printed in a directory listing. The arguments forr the
+# formatstring are the path and SHA1 of the submodule commit. Default
+# value: none.none
+module-link=%s%s
 
 # What's this do?
 enable-remote-branches=1
@@ -52,24 +66,3 @@ mimetype.css=text/css
 # Data
 mimetype.csv=text/csv
 mimetype.json=application/json
-
-# Set the title and heading of the repository index page
-root-title=Things
-
-# Set a subheading for the repository index page
-# root-desc=
-
-# Include some more info about example.com on the index page
-root-readme=/var/www/readme.html
-
-# Allow download of tar.gz, tar.bz2 and zip-files
-snapshots=tar.gz
-
-##
-## List of common mimetypes
-##
-
-
-# List of repositories.
-scan-path=/home/tlevine
-remove-suffix=1
