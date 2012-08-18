@@ -48,6 +48,13 @@ Disable any Apache sites that are enabled.
 
     rm /etc/apache2/sites-enabled/*
 
+Create the user
+
+    useradd $TREEGIT_USERNAME
+    mkdir -p /home/$TREEGIT_USERNAME/.ssh
+    cp ~/.ssh/authorized_keys /home/$TREEGIT_USERNAME/.ssh # optional
+    chown -R $TREEGIT_USERNAME: /home/$TREEGIT_USERNAME
+
 Then enable the cgit site. You get to choose between an SSL version and a
 non-SSL version.
 
@@ -71,15 +78,18 @@ And reload.
 
     service apache2 reload
 
-### Test
-Now log out of the SSH session and test that it's working by running the tests.
+## Use
+The system should be ready for use. You can log out of the SSH and follow the
+directions on the about page.
 
+    echo http://$TREEGIT_DOMAIN_NAME/?p=about
+
+You can test that it's working by running the tests.
+
+    export TREEGIT_USERNAME=tlevine
+    export TREEGIT_DOMAIN_NAME=git.thomaslevine.com
     ./tests
 
-## Use
-Once you've installed it, follow the directions that appear here.
-
-    echo http://$TREEGIGT_DOMAIN_NAME/?p=about
 
 ## To do
 
