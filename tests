@@ -1,0 +1,66 @@
+#!/bin/sh
+# Run this to test a deployment
+
+# Temporary stuff
+repo=$(uuidgen)
+tmp=$(mktemp -d)
+cloneurl="http://git.thomaslevine.com/clone/$repo.git"
+
+catch() {
+  [ "$?" = '0' ] && passed=true
+
+  if $passed
+    then
+    echo -ne '\033[32mPassed: '
+  else
+    echo -ne '\033[31mFailed: '
+  fi
+  echo -ne "\033[0m"
+
+  echo $*
+  passed=false
+}
+
+clear
+
+wget --quiet -O - http://git.thomaslevine.com/?p=about|grep 'git-create' > /dev/null
+catch 'I should see a git-create function at http://git.thomaslevine.com/?p=about.'
+
+ssh tlevine@git.thomaslevine.com 'echo hi' > /dev/null
+catch 'I should be able to ssh to tlevine@git.thomaslevine.com'
+
+wget --quiet -O - http://git.thomaslevine.com/|grep 'piwik.thomaslevine.com' > /dev/null
+catch 'Piwik should be called on http://git.thomaslevine.com.'
+
+ssh tlevine@git.thomaslevine.com "git-create-server $repo" > /dev/null
+catch 'I should be able to create a repository on the server.'
+
+wget --quiet -O - http://git.thomaslevine.com/|grep $repo > /dev/null
+catch 'I should see the repository on http://git.thomaslevine.com.'
+
+(
+  cd $tmp > /dev/null
+  mkdir foo > /dev/null
+  cd foo > /dev/null
+  git init > /dev/null
+  echo bar > baz > /dev/null
+  git add baz > /dev/null
+  git commit . -m foobar > /dev/null
+  git push tlevine@git.thomaslevine.com:$repo.git master &> /dev/null
+  catch 'I should be able to push to the newly-created repository.'
+)
+
+wget --quiet -O - http://git.thomaslevine.com/$repo/|grep $cloneurl > /dev/null
+catch 'Once I push the repository, I should see the clone url.'
+
+(
+  cd $tmp
+  git clone $cloneurl > /dev/null
+  catch 'I should be able to clone the repository over http.'
+)
+
+echo \  
+echo 'Clean up:'
+echo "  rm -Rf $tmp"
+echo "  ssh tlevine@git.thomaslevine.com 'rm -Rf $repo.git'"
+echo "I don't run these manually because bugs could be bad."
