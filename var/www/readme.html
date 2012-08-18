@@ -1,66 +1,19 @@
-<div class='content'><div id='summary'><h2>cgit quick facts</h2>
+<div class='content'><div id='summary'><h2>Using Tom's git hosting</h2>
 
-<ul>
-<li>web interface (<a href="http://www.ietf.org/rfc/rfc3875.txt">cgi</a>) for <a href="http://git-scm.org">git</a> repositories, written in <a href="http://en.wikipedia.org/wiki/C_%28programming_language%29">C</a></li>
-<li>licensed under <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPLv2</a></li>
-<li>discussions, patches etc. goes to the <a href="mailto:cgit@hjemli.net">list</a> (<a href="http://hjemli.net/pipermail/cgit/">archive</a>, <a href="http://dir.gmane.org/gmane.comp.version-control.cgit">gmane</a>).</li>
-<li>common questions are answered in the <a href="faq">faq</a>.</li>
-</ul>
+<h2>Pulling</h2>
 
-
-<h2>features</h2>
-
-<ul>
-<li>basic repository browsing (logs, diffs, trees&hellip;)</li>
-<li>caching of generated html</li>
-<li>cloneable urls (implements dumb http transport)</li>
-<li>commit feeds (atom format)</li>
-<li>discovery of git repositories</li>
-<li>on-the-fly archives for tags and commits</li>
-<li>plugin-support for e.g. syntax highlighting</li>
-<li>side-by-side diffs</li>
-<li>simple time/author statistics</li>
-<li>simple virtual hosting support (macro expansion)</li>
-<li>understands gitweb project-lists</li>
-<li>understands gitweb.owner in git config files</li>
-</ul>
-
-
-<h2>branches</h2>
-
-<ul>
-<li><a href="http://hjemli.net/git/cgit/log/?h=stable">stable</a>: fixes for the previous release</li>
-<li><a href="http://hjemli.net/git/cgit/log/">master</a>: features for the next release</li>
-<li><a href="http://hjemli.net/git/cgit/log/?h=wip">wip</a>: bleeding-edge stuff, frequently rebased</li>
-<li><a href="http://hjemli.net/git/cgit/log/?h=wiki">wiki</a>: the info found on this page</li>
-</ul>
-
-
-<h2>source code</h2>
-
-<ul>
-<li>download current or past <a href="http://hjemli.net/git/cgit/refs/tags">releases</a></li>
-<li>clone the repo using git or http protocol:
-
-<ul>
-<li>git://hjemli.net/pub/git/cgit</li>
-<li>http://hjemli.net/git/cgit</li>
-</ul>
-</li>
-<li>see the <a href="http://hjemli.net/git/cgit/tree/README">README</a> for build instructions</li>
-</ul>
-
-
-<h2>packages</h2>
-
-<ul>
-<li><a href="http://aur.archlinux.org/packages.php?ID=22790">archlinux</a></li>
-<li><a href="http://cgit.darwinports.com/">darwinports</a></li>
-<li><a href="https://admin.fedoraproject.org/pkgdb/acls/name/cgit">fedora</a></li>
-<li><a href="http://packages.gentoo.org/package/www-apps/cgit">gentoo</a></li>
-<li><a href="http://trac.macports.org/browser/trunk/dports/www/cgit">macports</a></li>
-<li><a href="https://build.opensuse.org/package/show?package=cgit&amp;project=devel%3Atools%3Ascm">opensuse</a></li>
-<li><a href="http://pkgsrc.se/wip/cgit">pkgsrc</a></li>
-</ul>
+<h2>Pushing</h2>
+<p>Set up SSH keys if you want.</p>
+<pre>scp-copy-id tlevine@git.thomaslevine.com</pre>
+<p>cgit searches for repositories in /home/tlevine. Here's a little helper to create repositories.</p>
+<pre>git-create() {
+  repo=$(basename "$1" .git)
+  ssh tlevine@git.thomaslevine.com "[ -e \"~/$repo.git\" ] || git init --bare \"~/$repo.git\"" &&
+    echo "Success! Now try this:" &&
+    echo "git remote add origin \'tlevine@git.thomaslevine.com:$repo.git\'"
+}</pre>
+<p>Run it like this</p>
+<pre>git-create foo</pre>
+<p>You may also edit the cgitrc file inside of your repository if you want things to look nice.</p>
 
 </div></div> <!-- class=content -->
