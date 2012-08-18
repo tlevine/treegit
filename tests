@@ -1,8 +1,8 @@
 #!/bin/sh
 # Run this to test a deployment
 
-[ $TREEGIT_USERNAME='' ] || (echo 'Please specify a TREEGIT_USERNAME' && exit 1)
-[ $TREEGIT_DOMAIN_NAME='' ] || (echo 'Please specify a TREEGIT_DOMAIN_NAME' && exit 1)
+[ $TREEGIT_USERNAME='' ] && echo 'Please specify a TREEGIT_USERNAME' && exit 1
+[ $TREEGIT_DOMAIN_NAME='' ] && echo 'Please specify a TREEGIT_DOMAIN_NAME' && exit 1
 
 # Temporary stuff
 repo=$(uuidgen)
