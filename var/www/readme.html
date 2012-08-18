@@ -16,9 +16,7 @@
 <h3>Creating</h3>
 <p>cgit searches for repositories in /home/tlevine. Here's a little helper to create repositories.</p>
 <pre>git-create() {
-  ssh tlevine@git.thomaslevine.com "git-create-server '$1'" &&
-    echo "Success! Now try this:" &&
-    echo "git remote add origin 'tlevine@git.thomaslevine.com:$repo.git'"
+  ssh tlevine@git.thomaslevine.com "git-create-server '$1'"
 }</pre>
 <p>Run it like this</p>
 <pre>git-create foo</pre>
