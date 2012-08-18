@@ -10,6 +10,12 @@
         </Directory>
         ScriptAlias / "/var/www/cgit.cgi/"
 
+        AliasMatch ^/clone/([^.].*)$ /home/tlevine/$1
+	<Directory "/home/tlevine/">
+                Order allow,deny
+                Allow from all
+        </Directory>
+
         ErrorLog ${APACHE_LOG_DIR}/error.log
 
         # Possible values include: debug, info, notice, warn, error, crit,
