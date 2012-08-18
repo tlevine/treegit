@@ -35,7 +35,7 @@ root-title=Things
 # root-desc=
 
 # Include some more info about example.com on the index page
-# root-readme=/var/www/htdocs/about.html
+root-readme=/var/www/readme.html
 
 # Allow download of tar.gz, tar.bz2 and zip-files
 snapshots=tar.gz
