@@ -131,5 +131,7 @@ You can test that it's working by running the tests.
 
 ## To do
 
+* Set up hooks so that the cgitrc and description files can be versioned inside the
+    repository and automatically placed in the git directory on the server.
 * Switch Apache for Nginx
 * Make it easier to back up configuration of different sites but still apply updates.
