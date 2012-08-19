@@ -1,15 +1,27 @@
 #!/bin/sh
 set -e
+absolute_repo_path="$1"
+[ ! -d "$absolute_repo_path" ] && echo 'Specify the absolute path of a repository.' && exit 1
 
 # Check out the repository
 export GIT_WORK_TREE=$(mktemp -d)
-export GIT_DIR="$HOME/$repo.git"
+export GIT_DIR="$absolute_repo_path"
 git checkout -f
 
 # Update cgitrc and description
 [ -e $GIT_WORK_TREE/cgitrc ] &&
-  cp $GIT_WORK_TREE/cgitrc $GIT_DIR/.git &&
-  sed -n 's/^desc=//p' $GIT_WORK_TREE/cgitrc > $GIT_DIR/.git/description
+  cp $GIT_WORK_TREE/cgitrc $GIT_DIR &&
+  sed -n 's/^desc=//p' $GIT_WORK_TREE/cgitrc > $GIT_DIR/description
+
+# Update readme
+html_readme=$(find $GIT_WORK_TREE -iname readme.html|head -n1)
+if [ -e "$htmlreadme" ]
+  then
+  cp "$html_readme" "$GIT_WORK_TREE/readme.html"
+else
+  md_readme=$(find $GIT_WORK_TREE -iname readme.md|head -n1)
+  [ -e "$md_readme" ] && markdown "$md_readme" > "$GIT_WORK_TREE/readme.html"
+fi
 
 # Clean up the checkout
 rm -R $GIT_WORK_TREE

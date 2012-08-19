@@ -116,6 +116,11 @@ Finally, reload the apache configuration.
 
     service apache2 reload
 
+## Extra
+Some other things that might help
+
+    apt-get install markdown 
+
 ## Use
 The system should be ready for use. You can log out of the SSH and follow the
 directions on the about page.

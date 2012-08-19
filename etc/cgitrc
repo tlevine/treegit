@@ -19,6 +19,7 @@ robots="index, follow"
 root-title=Things
 scan-hidden-path=0
 scan-path=/home/TREEGIT_USERNAME
+readme=readme.html
 root-desc="All your base are belong to us."
 root-readme=/var/www/readme.html
 side-by-side-diffs=1
