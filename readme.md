@@ -132,5 +132,4 @@ You can test that it's working by running the tests.
 ## To do
 
 * Switch Apache for Nginx
-* Generate a certifate.
-* Set up basic http authentication for the SSL site.
+* Make it easier to back up configuration of different sites but still apply updates.
