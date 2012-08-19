@@ -30,7 +30,7 @@ else
   post_update="$HOME/$repo.git/hooks/post-update" &&
 
   echo '#!/bin/sh' > "$post_update" &&
-  echo 'treegit-post-update' > "$post_update" &&
+  echo "exec treegit-post-update '$HOME/$repo.git'" > "$post_update" &&
   chmod +x "$post_update" &&
 
   echo "The remote has been created. Run this to add it:" &&
