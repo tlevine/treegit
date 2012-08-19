@@ -31,6 +31,7 @@ else
   # http://blog.publicfields.net/2011/03/how-to-setup-your-very-own-git-server.html
   echo '#!/bin/sh' > "$HOME/$repo.git/hooks/post-update" &&
   echo 'exec git update-server-info' >> "$HOME/$repo.git/hooks/post-update" &&
+  echo 'exec cp ./cgitrc ./.git' >> "$HOME/$repo.git/hooks/post-update" &&
   chmod +x "$HOME/$repo.git/hooks/post-update" &&
   echo "The remote has been created. Run this to add it:" &&
   echo "  git remote add origin 'TREEGIT_USERNAME@TREEGIT_DOMAIN_NAME:$repo.git'"
