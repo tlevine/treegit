@@ -24,14 +24,17 @@
         LogLevel warn
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        # SSL with a client certificate
-	#SSLEngine on
-	#SSLCertificateFile    /etc/ssl/certs/ssl-cert-treegit.cert
-	#SSLCertificateFile    /etc/ssl/certs/ssl-cert-treegit-privkey.pem
-	#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-treegit.key
+	# SSL
+        SSLEngine on
 
-	#SSLCACertificateFile /etc/ssl/certs/ssl-cert-treegit-cacert.pem
-	#SSLVerifyClient require
+        # Identify the server
+        SSLCertificateFile    /etc/ssl/certs/treegit.crt
+        SSLCertificateKeyFile /etc/ssl/private/treegit.key
+
+	# Identify the client
+        SSLCACertificateFile  /etc/ssl/certs/treegit.crt
+        SSLVerifyClient require
+
 
 </VirtualHost>
 <VirtualHost *:80>
