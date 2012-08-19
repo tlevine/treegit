@@ -79,8 +79,8 @@ Then enable cgit.
     a2ensite cgit-ssl
 
 This site is set up to perform identification of both the server and the client
-over SSL. It expects a self-signed certificate stored in `/etc/ssl/certs/thomaslevine.crt`,
-with its key file in `/etc/ssl/private/thomaslevine.key`. Furthermore, it expects
+over SSL. It expects a self-signed certificate stored in `/etc/ssl/certs/treegit.crt`,
+with its key file in `/etc/ssl/private/treegit.key`. Furthermore, it expects
 that the same certificate be used to sign the client key, which must be imported
 in the web browser. Here is how you can generate all these files.
 
