@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+# Check out the repository
+export GIT_WORK_TREE=$(mktemp -d)
+export GIT_DIR="$HOME/$repo.git"
+git checkout -f
+
+# Update cgitrc and description
+[ -e $GIT_WORK_TREE/cgitrc ] &&
+  cp $GIT_WORK_TREE/cgitrc $GIT_DIR/.git &&
+  sed -n 's/^desc=//p' $GIT_WORK_TREE/cgitrc > $GIT_DIR/.git/description
+
+# Clean up the checkout
+rm -R $GIT_WORK_TREE
+
+# So that cloning over HTTP works
+# http://blog.publicfields.net/2011/03/how-to-setup-your-very-own-git-server.html
+git update-server-info
