@@ -22,7 +22,7 @@ Set up SSH keys if you want.
 
 Install dependencies
 
-    ssh root@$TREEGIT_DOMAIN_NAME 'apt-get install apache2'
+    ssh root@$TREEGIT_DOMAIN_NAME 'apt-get update && apt-get upgrade && apt-get install apache2 markdown'
 
 Unpack the current directory into `/`.
 
@@ -115,11 +115,6 @@ to the server.
 Finally, reload the apache configuration.
 
     service apache2 reload
-
-## Extra
-Some other things that might help
-
-    apt-get install markdown 
 
 ## Use
 The system should be ready for use. You can log out of the SSH and follow the
