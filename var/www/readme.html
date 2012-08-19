@@ -16,7 +16,7 @@
 <h3>Creating</h3>
 <p>cgit searches for repositories in /home/TREEGIT_USERNAME. Here's a little helper to create repositories.</p>
 <pre>treegit-create() {
-  ssh TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME "treegit-create '$1'"
+  ssh TREEGIT_USERNAME@TREEGIT_DOMAIN_NAME "treegit-create '$1'"
 }</pre>
 <p>Run it like this</p>
 <pre>treegit-create $(basename "$PWD")</pre>
@@ -24,8 +24,8 @@
 
 <h3>Pushing</h3>
 <p>Set up SSH keys if you want.</p>
-<pre>scp-copy-id TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME</pre>
+<pre>scp-copy-id TREEGIT_USERNAME@TREEGIT_DOMAIN_NAME</pre>
 <p>Then set the remote.</p>
-<pre>git remote add cgit TREEGIT_USERNAME@$TREEGIT_DOMAIN_NAME:$(basename "$PWD").git master</pre>
+<pre>git remote add cgit TREEGIT_USERNAME@TREEGIT_DOMAIN_NAME:$(basename "$PWD").git master</pre>
 
 </div></div> <!-- class=content -->
