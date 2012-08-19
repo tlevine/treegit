@@ -11,7 +11,7 @@
 <h2>Usage</h2>
 
 <h3>Pulling</h3>
-<p>If you are not Tom, this is probably all you'll be doing.</p>
+<p>There is a "Clone" url at the bottom of each repository's summary page. git clone that.</p>
 
 <h3>Creating</h3>
 <p>cgit searches for repositories in /home/TREEGIT_USERNAME. Here's a little helper to create repositories.</p>
@@ -20,7 +20,13 @@
 }</pre>
 <p>Run it like this</p>
 <pre>treegit-create $(basename "$PWD")</pre>
-<p>You may also edit the cgitrc file inside of your repository if you want things to look nice.</p>
+
+<h3>Organizing repositories</h3>
+<p>If you add a readme.html or a readme.md file to the root of the repository, it will show up in the repository's "about" tab.</p>
+<p>Once you've made a readme, edit the cgitrc file inside of your repository if you want things to look even nicer. Consider setting these at least:</p>
+<pre>desc=An off-the-self cgit server with some helpers.
+section=boxes</pre>
+<p>This sets a description to appear next to the repository title and a section in which to list the repository.</p>
 
 <h3>Pushing</h3>
 <p>Set up SSH keys if you want.</p>
