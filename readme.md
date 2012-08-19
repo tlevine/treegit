@@ -116,6 +116,15 @@ Finally, reload the apache configuration.
 
     service apache2 reload
 
+## More configuration
+
+If you would like to configure cgit further, edit `/etc/cgitrc.local` per the
+instructions in the [man page](http://hjemli.net/git/cgit/tree/cgitrc.5.txt).
+Configurations here are included at the end of `/etc/cgitrc`, so they will
+override any settings specified there. Also, this file will not be overwritten
+if you copy the treegit `etc` directory (the one in this repository) because
+it does not contain the file `etc/cgitrc.local`.
+
 ## Use
 The system should be ready for use. You can log out of the SSH and follow the
 directions on the about page.

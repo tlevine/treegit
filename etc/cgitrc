@@ -67,3 +67,6 @@ mimetype.css=text/css
 # Data
 mimetype.csv=text/csv
 mimetype.json=application/json
+
+# Include at the end to override this file's configuration
+include=/etc/cgitrc.local
