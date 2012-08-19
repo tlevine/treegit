@@ -78,7 +78,41 @@ Then enable cgit.
 
     a2ensite cgit-ssl
 
-And reload.
+This site is set up to perform identification of both the server and the client
+over SSL. It expects a self-signed certificate stored in `/etc/ssl/certs/thomaslevine.crt`,
+with its key file in `/etc/ssl/private/thomaslevine.key`. Furthermore, it expects
+that the same certificate be used to sign the client key, which must be imported
+in the web browser. Here is how you can generate all these files.
+
+    # Generate
+    openssl genrsa -des3 -out treegit.key 4096
+
+    # Request
+    openssl req -new -key treegit.key -out treegit.csr
+
+    # Remove passphrase
+    cp treegit.key treegit.key.org
+    openssl rsa -in treegit.key.org -out treegit.key
+
+    # Sign
+    openssl x509 -req -days 2000 -in treegit.csr -signkey treegit.key -out treegit.crt
+
+    # Convert to pkcs12 for client authentication.
+    openssl pkcs12 -export -in treegit.crt -inkey treegit.key -out treegit.p12 -name TreeGit
+
+First, upload the files for server identification.
+
+    # Upload
+    scp treegit.key root@$TREEGIT_DOMAIN_NAME:/etc/ssl/private/treegit.key
+    scp treegit.crt root@$TREEGIT_DOMAIN_NAME:/etc/ssl/certs/treegit.crt
+
+Second, import the `treegit.crt` file in your browser to identify the server to
+your browser.
+
+Third, import the `treegit.p12` file in your browser to identify your browser
+to the server.
+
+Finally, reload the apache configuration.
 
     service apache2 reload
 
