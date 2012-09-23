@@ -9,9 +9,15 @@ export GIT_DIR="$absolute_repo_path"
 git checkout -f
 
 # Update cgitrc and description
-[ -e $GIT_WORK_TREE/cgitrc ] &&
+if [ -e $GIT_WORK_TREE/.cgitrc ]
+  then
+  cp $GIT_WORK_TREE/.cgitrc $GIT_DIR &&
+  sed -n 's/^desc=//p' $GIT_WORK_TREE/.cgitrc > $GIT_DIR/description
+elif [ -e $GIT_WORK_TREE/cgitrc ]
+  then
   cp $GIT_WORK_TREE/cgitrc $GIT_DIR &&
   sed -n 's/^desc=//p' $GIT_WORK_TREE/cgitrc > $GIT_DIR/description
+fi
 
 # Update readme
 html_readme=$(find $GIT_WORK_TREE -iname readme.html|head -n1)
