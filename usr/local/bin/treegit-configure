@@ -17,3 +17,7 @@ for file in $files
     -e "s/TREEGIT_EMAIL_ADDRESS/$TREEGIT_EMAIL_ADDRESS/g" \
     $file
 done
+
+# Make the cache directory
+mkdir -p /var/cache/cgit
+chown www-data: /var/cache/cgit
