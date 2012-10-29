@@ -16,7 +16,7 @@ if [ -e $GIT_WORK_TREE/.cgitrc ]
   sed -n 's/^desc=//p' $GIT_WORK_TREE/.cgitrc > $GIT_DIR/description
 elif [ -e $GIT_WORK_TREE/cgitrc ]
   then
-  cp $GIT_WORK_TREE/cgitrc $GIT_DIR/cgitrc && desc
+  cp $GIT_WORK_TREE/cgitrc $GIT_DIR/cgitrc &&
   sed -n 's/^desc=//p' $GIT_WORK_TREE/cgitrc > $GIT_DIR/description
 fi
 
