@@ -22,7 +22,7 @@ Set up SSH keys if you want.
 
 Install dependencies
 
-    ssh root@$TREEGIT_DOMAIN_NAME 'apt-get update && apt-get upgrade && apt-get install apache2 markdown'
+    ssh root@$TREEGIT_DOMAIN_NAME 'apt-get update && apt-get upgrade && apt-get install apache2 markdown git'
 
 Unpack the current directory into `/`.
 
